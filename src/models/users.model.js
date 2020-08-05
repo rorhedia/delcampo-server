@@ -17,7 +17,7 @@ const usersSchema = new mongoose.Schema({
     minlength: 8,
   },
   description: {
-    type: Text,
+    type: String,
   },
   age: {
     type: Number,
