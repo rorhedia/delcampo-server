@@ -1,11 +1,14 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-const addressSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "users",
-    required: true,
-  },
+
+const addressSchema = new mongoose.Schema({
+  users: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "users",
+      require: true,
+    },
+  ],
+
   name: {
     type: String,
     required: true,
@@ -30,8 +33,7 @@ const addressSchema = new Schema({
   },
   postal_code: {
     type: Number,
-    min: 2,
-    max: 10,
+
     required: true,
   },
   phone: {
