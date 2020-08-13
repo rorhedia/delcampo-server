@@ -5,9 +5,10 @@ const harvestSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  id_product: {
+  product: {
     type: mongoose.Types.ObjectId,
     ref: "products",
+    required: true,
   },
   weight: {
     type: Number,
@@ -25,12 +26,10 @@ const harvestSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  date_end: [
-    {
-      type: Date,
-      required: true,
-    },
-  ],
+  date_end: {
+    type: Date,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("harvest", harvestSchema);

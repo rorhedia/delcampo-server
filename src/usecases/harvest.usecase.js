@@ -1,7 +1,7 @@
 const Harvest = require("../models/harvest.model");
 
 function getAll() {
-  return Harvest.find().populate("id_product");
+  return Harvest.find().populate("product");
 }
 
 function create(harvestData) {
