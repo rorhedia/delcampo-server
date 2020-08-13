@@ -4,12 +4,13 @@ const bcrypt = require("../lib/bcrypt");
 const jwt = require("../lib/jwt");
 
 function getAll() {
-  return Address.find();
+  return Address.find().populate("user");
 }
 
 function create(addressData) {
   return Address.create(addressData);
 }
+
 function findByIdAndUpdate(addressId, addressUpdate) {
   return Address.findByIdAndUpdate(addressId, addressUpdate);
 }
