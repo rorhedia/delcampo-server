@@ -13,10 +13,18 @@ function findByIdAndUpdate(productsId, productsUpdate) {
 function findByIdAndDelete(productsId) {
   return Products.findByIdAndDelete(productsId);
 }
+async function getById(id) {
+  const productById = await Products.findOne({ _id: id });
+  if (!productById) {
+    throw new Error("Dato incorrecto");
+  }
+  return productById;
+}
 
 module.exports = {
   getAll,
   create,
   findByIdAndUpdate,
   findByIdAndDelete,
+  getById,
 };

@@ -1,15 +1,15 @@
 const express = require("express");
-const products = require("../usecases/products.usecase");
+const harvest = require("../usecases/harvest.usecase");
 const router = express.Router();
 const auth = require("../middlewares/auth");
 
 router.get("/", async (req, res) => {
   try {
-    const allProducts = await products.getAll();
+    const allHarvest = await harvest.getAll();
     res.json({
       success: true,
       data: {
-        products: allProducts,
+        harvest: allHarvest,
       },
     });
   } catch (error) {
@@ -23,14 +23,11 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const newProductsData = req.body;
-
-    const newProducts = await products.create(newProductsData);
+    const newHarvestData = req.body;
+    const newHarvest = await harvest.create(newHarvestData);
     res.json({
       success: true,
-      data: {
-        newProducts,
-      },
+      data: newHarvest,
     });
   } catch (error) {
     res.status(400);
@@ -40,17 +37,18 @@ router.post("/", async (req, res) => {
     });
   }
 });
+
 router.patch("/:id", async (request, response) => {
   try {
     const id = request.params.id;
     const Update = request.body;
 
-    const updateProducts = await products.findByIdAndUpdate(id, Update);
+    const updateHarvest = await harvest.findByIdAndUpdate(id, Update);
 
     response.json({
       success: true,
       data: {
-        updateProducts,
+        updateHarvest,
       },
     });
   } catch (error) {
@@ -63,12 +61,12 @@ router.patch("/:id", async (request, response) => {
 });
 router.delete("/:id", async (request, response) => {
   try {
-    const productsIdDelete = request.params.id;
-    const deleteProducts = await products.findByIdAndDelete(productsIdDelete);
+    const harvestIdDelete = request.params.id;
+    const deleteHarvest = await harvest.findByIdAndDelete(harvestIdDelete);
     response.json({
       success: true,
       data: {
-        deleteProducts,
+        deleteHarvest,
       },
     });
   } catch (error) {
@@ -77,25 +75,6 @@ router.delete("/:id", async (request, response) => {
         success: false,
         error: error.message,
       });
-  }
-});
-
-router.get("/:id", async (request, response) => {
-  try {
-    const id = request.params.id;
-    const productData = await products.getById(id);
-
-    response.json({
-      success: true,
-      data: productData,
-      message: "byid",
-    });
-  } catch (error) {
-    response.status(400);
-    response.json({
-      success: false,
-      error: error.message,
-    });
   }
 });
 
