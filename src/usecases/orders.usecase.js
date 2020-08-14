@@ -1,10 +1,6 @@
-const Users = require("../models/users.model");
-const Address = require("../models/address.model");
 const Orders = require("../models/orders.model");
-const bcrypt = require("../lib/bcrypt");
-const jwt = require("../lib/jwt");
 function getAll() {
-  return Orders.find();
+  return Orders.find().populate("users").populate("address").exec();
 }
 function create(ordersData) {
   return Orders.create(ordersData);

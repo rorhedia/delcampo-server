@@ -1,5 +1,5 @@
 const express = require("express");
-const orders = require("../usecases/orders.usercase");
+const orders = require("../usecases/orders.usecase");
 const router = express.Router();
 const auth = require("../middlewares/auth");
 router.get("/", async (req, res) => {
@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
     res.json({
       success: true,
       data: {
-        newAddress,
+        newOrders,
       },
     });
   } catch (error) {
@@ -59,7 +59,7 @@ router.patch("/:id", async (request, response) => {
 router.delete("/:id", async (request, response) => {
   try {
     const ordersIdDelete = request.params.id;
-    const deleteOrders = await address.findByIdAndDelete(ordersIdDelete);
+    const deleteOrders = await orders.findByIdAndDelete(ordersIdDelete);
     response.json({
       success: true,
       data: {
