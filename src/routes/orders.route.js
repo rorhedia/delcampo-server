@@ -1,15 +1,14 @@
 const express = require("express");
-const address = require("../usecases/address.usecase");
+const orders = require("../usecases/orders.usecase");
 const router = express.Router();
 const auth = require("../middlewares/auth");
-
 router.get("/", async (req, res) => {
   try {
-    const allAddress = await address.getAll();
+    const allOrders = await orders.getAll();
     res.json({
       success: true,
       data: {
-        address: allAddress,
+        orders: allOrders,
       },
     });
   } catch (error) {
@@ -20,15 +19,14 @@ router.get("/", async (req, res) => {
     });
   }
 });
-
 router.post("/", async (req, res) => {
   try {
-    const newAddressData = req.body;
-    const newAddress = await address.create(newAddressData);
+    const newOrdersData = req.body;
+    const newOrders = await orders.create(newOrdersData);
     res.json({
       success: true,
       data: {
-        newAddress,
+        newOrders,
       },
     });
   } catch (error) {
@@ -39,18 +37,15 @@ router.post("/", async (req, res) => {
     });
   }
 });
-
 router.patch("/:id", async (request, response) => {
   try {
     const id = request.params.id;
     const Update = request.body;
-
-    const updateAddress = await address.findByIdAndUpdate(id, Update);
-
+    const updateOrders = await orders.findByIdAndUpdate(id, Update);
     response.json({
       success: true,
       data: {
-        updateAddress,
+        updateOrders,
       },
     });
   } catch (error) {
@@ -63,12 +58,12 @@ router.patch("/:id", async (request, response) => {
 });
 router.delete("/:id", async (request, response) => {
   try {
-    const addressIdDelete = request.params.id;
-    const deleteAddress = await address.findByIdAndDelete(addressIdDelete);
+    const ordersIdDelete = request.params.id;
+    const deleteOrders = await orders.findByIdAndDelete(ordersIdDelete);
     response.json({
       success: true,
       data: {
-        deleteAddress,
+        deleteOrders,
       },
     });
   } catch (error) {

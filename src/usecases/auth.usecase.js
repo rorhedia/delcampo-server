@@ -3,11 +3,7 @@ const bcrypt = require("../lib/bcrypt");
 const jwt = require("../lib/jwt");
 
 const signup = async (userData) => {
-  const { email, password } = userData;
-
-  const userExist = await Users.findOne({ email });
-
-  if (userExist) throw new Error("El usuario ya existe");
+  const { password } = userData;
 
   const paswdEncripted = await bcrypt.hash(password);
 

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
 
 const usersSchema = new mongoose.Schema({
   name: {
@@ -10,6 +11,8 @@ const usersSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
+    uniqueCaseInsensitive: true,
   },
   password: {
     type: String,
@@ -24,7 +27,7 @@ const usersSchema = new mongoose.Schema({
     required: true,
     min: 18,
   },
-  userType: {
+  role: {
     type: String,
     required: true,
   },
@@ -32,6 +35,18 @@ const usersSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+});
+
+usersSchema.methods.toJSON = function () {
+  let user = this;
+  let userObject = user.toObject();
+  delete userObject.password;
+
+  return userObject;
+};
+
+usersSchema.plugin(uniqueValidator, {
+  message: "Error, expected {PATH} to be unique.",
 });
 
 module.exports = mongoose.model("users", usersSchema);
