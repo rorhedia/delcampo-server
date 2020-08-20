@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
 
 const productsSchema = new mongoose.Schema({
   name: {
@@ -6,6 +7,8 @@ const productsSchema = new mongoose.Schema({
     required: true,
     maxlength: 50,
     minlength: 2,
+    unique: true,
+    uniqueCaseInsensitive: true,
   },
   description: {
     type: String,
