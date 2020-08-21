@@ -22,6 +22,9 @@ const harvestSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  status: {
+    type: Boolean,
+  },
   date_start: {
     type: Date,
     default: Date.now,
