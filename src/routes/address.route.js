@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
     const newAddressData = req.body;
     const newAddress = await address.create(newAddressData);
@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.patch("/:id", async (request, response) => {
+router.patch("/:id", auth, async (request, response) => {
   try {
     const id = request.params.id;
     const Update = request.body;
@@ -61,7 +61,7 @@ router.patch("/:id", async (request, response) => {
     });
   }
 });
-router.delete("/:id", async (request, response) => {
+router.delete("/:id", auth, async (request, response) => {
   try {
     const addressIdDelete = request.params.id;
     const deleteAddress = await address.findByIdAndDelete(addressIdDelete);
