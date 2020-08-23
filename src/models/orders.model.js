@@ -1,19 +1,15 @@
 const mongoose = require("mongoose");
 const ordersSchema = new mongoose.Schema({
-  users: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "users",
-      require: true,
-    },
-  ],
-  adress: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "adress",
-      require: true,
-    },
-  ],
+  users: {
+    type: mongoose.Types.ObjectId,
+    ref: "users",
+    require: true,
+  },
+  address: {
+    type: mongoose.Types.ObjectId,
+    ref: "address",
+    require: true,
+  },
   bag: {
     type: Array,
     required: true,
@@ -22,13 +18,11 @@ const ordersSchema = new mongoose.Schema({
   },
   payment: {
     type: String,
-    minlength: 100,
-    minlength: 5,
+    maxlength: 100,
+    minlength: 1,
   },
   total: {
-    type: String,
-    minlength: 100,
-    minlength: 5,
+    type: Number,
   },
 });
 module.exports = mongoose.model("orders", ordersSchema);

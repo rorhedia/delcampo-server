@@ -3,7 +3,7 @@ const products = require("../usecases/products.usecase");
 const router = express.Router();
 const auth = require("../middlewares/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const allProducts = await products.getAll();
     res.json({
@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
     const newProductsData = req.body;
 
@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
     });
   }
 });
-router.patch("/:id", async (request, response) => {
+router.patch("/:id", auth, async (request, response) => {
   try {
     const id = request.params.id;
     const Update = request.body;
@@ -61,7 +61,7 @@ router.patch("/:id", async (request, response) => {
     });
   }
 });
-router.delete("/:id", async (request, response) => {
+router.delete("/:id", auth, async (request, response) => {
   try {
     const productsIdDelete = request.params.id;
     const deleteProducts = await products.findByIdAndDelete(productsIdDelete);
@@ -80,7 +80,7 @@ router.delete("/:id", async (request, response) => {
   }
 });
 
-router.get("/:id", async (request, response) => {
+router.get("/:id", auth, async (request, response) => {
   try {
     const id = request.params.id;
     const productData = await products.getById(id);
