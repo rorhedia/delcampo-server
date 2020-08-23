@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
+const categories = {
+  values: ["Frutas", "Verduras", "Flores", "Raíces", "Vainas"],
+  message: "Error, elige una caterogia válida",
+};
 
 const productsSchema = new mongoose.Schema({
   name: {
@@ -10,8 +14,10 @@ const productsSchema = new mongoose.Schema({
     unique: true,
     uniqueCaseInsensitive: true,
   },
-  tag: {
+  category: {
     type: String,
+    enum: categories,
+    required: true,
   },
   created: {
     type: Date,

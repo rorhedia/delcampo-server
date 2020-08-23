@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
+const userRole = {
+  values: ["Productor", "Comprador"],
+  message: "Elige un rol válido",
+};
 
 const usersSchema = new mongoose.Schema({
   name: {
@@ -30,6 +34,7 @@ const usersSchema = new mongoose.Schema({
   role: {
     type: String,
     required: true,
+    enum: userRole,
   },
   created: {
     type: Date,
