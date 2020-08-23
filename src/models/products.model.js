@@ -14,16 +14,7 @@ const productsSchema = new mongoose.Schema({
     unique: true,
     uniqueCaseInsensitive: true,
   },
-<<<<<<< Updated upstream
-  description: {
-    type: String,
-    minlength: 100,
-    minlength: 5,
-  },
-  tag: {
-=======
   category: {
->>>>>>> Stashed changes
     type: String,
     enum: categories,
     required: true,
