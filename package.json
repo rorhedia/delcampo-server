@@ -2,7 +2,7 @@
   "name": "delcampo-api",
   "version": "1.0.0",
   "engines": {
-    "node": "^12.18.2"
+    "node": ">=12.18.2"
   },
   "description": "Esta API se encargará de procesar cada request que sea solicitada para la interacción con la BD",
   "main": "index.js",
