@@ -11,9 +11,11 @@ function create(harvestData) {
 function findByIdAndUpdate(harvestId, harvestUpdate) {
   return Harvest.findByIdAndUpdate(harvestId, harvestUpdate);
 }
+
 function findByIdAndDelete(harvestId) {
   return Harvest.findByIdAndDelete(harvestId);
 }
+
 module.exports = {
   getAll,
   create,

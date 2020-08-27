@@ -40,6 +40,7 @@ router.post("/", auth, async (req, res) => {
     });
   }
 });
+
 router.patch("/:id", auth, async (request, response) => {
   try {
     const id = request.params.id;
@@ -61,6 +62,7 @@ router.patch("/:id", auth, async (request, response) => {
     });
   }
 });
+
 router.delete("/:id", auth, async (request, response) => {
   try {
     const productsIdDelete = request.params.id;

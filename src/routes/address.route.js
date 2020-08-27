@@ -61,6 +61,7 @@ router.patch("/:id", auth, async (request, response) => {
     });
   }
 });
+
 router.delete("/:id", auth, async (request, response) => {
   try {
     const addressIdDelete = request.params.id;
@@ -79,4 +80,5 @@ router.delete("/:id", auth, async (request, response) => {
       });
   }
 });
+
 module.exports = router;
