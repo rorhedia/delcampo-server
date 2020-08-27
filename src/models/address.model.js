@@ -30,7 +30,6 @@ const addressSchema = new mongoose.Schema({
   },
   postal_code: {
     type: Number,
-
     required: true,
   },
   phone: {

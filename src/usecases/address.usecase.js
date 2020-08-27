@@ -14,6 +14,7 @@ function create(addressData) {
 function findByIdAndUpdate(addressId, addressUpdate) {
   return Address.findByIdAndUpdate(addressId, addressUpdate);
 }
+
 function findByIdAndDelete(addressId) {
   return Address.findByIdAndDelete(addressId);
 }

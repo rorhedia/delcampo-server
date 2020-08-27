@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
+const categories = {
+  values: ["Frutas", "Verduras", "Flores", "Raíces", "Vainas"],
+  message: "Error, elige una caterogia válida",
+};
+
 const productsSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -10,8 +15,10 @@ const productsSchema = new mongoose.Schema({
     unique: true,
     uniqueCaseInsensitive: true,
   },
-  tag: {
+  category: {
     type: String,
+    enum: categories,
+    required: true,
   },
   created: {
     type: Date,
@@ -19,15 +26,7 @@ const productsSchema = new mongoose.Schema({
   },
 });
 
-usersSchema.methods.toJSON = function () {
-  let user = this;
-  let userObject = user.toObject();
-  delete userObject.password;
-
-  return userObject;
-};
-
-usersSchema.plugin(uniqueValidator, {
+productsSchema.plugin(uniqueValidator, {
   message: "Error, expected {PATH} to be unique.",
 });
 

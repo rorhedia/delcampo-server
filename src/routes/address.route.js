@@ -3,7 +3,7 @@ const address = require("../usecases/address.usecase");
 const router = express.Router();
 const auth = require("../middlewares/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const allAddress = await address.getAll();
     res.json({
@@ -61,6 +61,7 @@ router.patch("/:id", auth, async (request, response) => {
     });
   }
 });
+
 router.delete("/:id", auth, async (request, response) => {
   try {
     const addressIdDelete = request.params.id;
@@ -79,4 +80,5 @@ router.delete("/:id", auth, async (request, response) => {
       });
   }
 });
+
 module.exports = router;
