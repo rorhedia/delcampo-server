@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
+
 const userRole = {
   values: ["Productor", "Comprador"],
   message: "Elige un rol válido",
