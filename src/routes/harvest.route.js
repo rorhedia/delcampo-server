@@ -21,6 +21,25 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const harvest = await harvest.getById(id);
+    res.json({
+      success: true,
+      data: {
+        harvest: harvest,
+      },
+    });
+  } catch (error) {
+    res.status(400);
+    res.json({
+      success: false,
+      error: error.message,
+    });
+  }
+});
+
 router.post("/", auth, async (req, res) => {
   try {
     const newHarvestData = req.body;

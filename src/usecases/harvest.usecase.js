@@ -4,6 +4,10 @@ function getAll() {
   return Harvest.find().populate("product");
 }
 
+function getById(id) {
+  return Harvest.findById(id).limit(1).populate("product");
+}
+
 function create(harvestData) {
   return Harvest.create(harvestData);
 }
@@ -18,6 +22,7 @@ function findByIdAndDelete(harvestId) {
 
 module.exports = {
   getAll,
+  getById,
   create,
   findByIdAndUpdate,
   findByIdAndDelete,
