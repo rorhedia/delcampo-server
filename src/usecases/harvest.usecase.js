@@ -1,28 +1,21 @@
 const Harvest = require("../models/harvest.model");
 
-function getAll() {
-  return Harvest.find().populate("product");
-}
+const getAll = async () => await Harvest.find().populate("product");
 
-function getById(id) {
-  return Harvest.findById(id).limit(1).populate("product");
-}
+const getHarvestById = async (id) =>
+  await Harvest.findById(id).populate("product");
 
-function create(harvestData) {
-  return Harvest.create(harvestData);
-}
+const create = async (harvestData) => await Harvest.create(harvestData);
 
-function findByIdAndUpdate(harvestId, harvestUpdate) {
-  return Harvest.findByIdAndUpdate(harvestId, harvestUpdate);
-}
+const findByIdAndUpdate = async (harvestId, harvestUpdate) =>
+  await Harvest.findByIdAndUpdate(harvestId, harvestUpdate);
 
-function findByIdAndDelete(harvestId) {
-  return Harvest.findByIdAndDelete(harvestId);
-}
+const findByIdAndDelete = async (harvestId) =>
+  await Harvest.findByIdAndDelete(harvestId);
 
 module.exports = {
   getAll,
-  getById,
+  getHarvestById,
   create,
   findByIdAndUpdate,
   findByIdAndDelete,

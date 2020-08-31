@@ -1,20 +1,15 @@
 const Orders = require("../models/orders.model");
 
-function getAll() {
-  return Orders.find().populate("users").populate("address").exec();
-}
+const getAll = async () =>
+  await Orders.find().populate("users").populate("address").exec();
 
-function create(ordersData) {
-  return Orders.create(ordersData);
-}
+const create = async (ordersData) => await Orders.create(ordersData);
 
-function findByIdAndUpdate(ordersId, ordersUpdate) {
-  return Orders.findByIdAndUpdate(ordersId, ordersUpdate);
-}
+const findByIdAndUpdate = async (ordersId, ordersUpdate) =>
+  await Orders.findByIdAndUpdate(ordersId, ordersUpdate);
 
-function findByIdAndDelete(ordersId) {
-  return Orders.findByIdAndDelete(ordersId);
-}
+const findByIdAndDelete = async (ordersId) =>
+  await Orders.findByIdAndDelete(ordersId);
 
 module.exports = {
   getAll,

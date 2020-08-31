@@ -23,12 +23,12 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const id = req.params.id;
-    const harvest = await harvest.getById(id);
+    console.log(req.params.id);
+    const request = await harvest.getHarvestById(req.params.id);
     res.json({
       success: true,
       data: {
-        harvest: harvest,
+        harvest: request,
       },
     });
   } catch (error) {
