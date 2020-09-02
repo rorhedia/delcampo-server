@@ -1,7 +1,7 @@
 const express = require("express");
 const harvest = require("../usecases/harvest.usecase");
 const router = express.Router();
-const auth = require("../middlewares/auth");
+const { auth } = require("../middlewares/auth");
 
 router.get("/", async (req, res) => {
   try {
