@@ -21,6 +21,7 @@ const ordersSchema = new mongoose.Schema({
     type: String,
     maxlength: 100,
     minlength: 1,
+    default: "paypal",
   },
   total: {
     type: Number,
