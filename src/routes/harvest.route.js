@@ -1,12 +1,9 @@
 const express = require("express");
 const harvest = require("../usecases/harvest.usecase");
 const router = express.Router();
-<<<<<<< HEAD
 const { auth } = require("../middlewares/auth");
 const upload = require("../lib/S3Images");
 const singleUpload = upload.single("images");
-
-
 
 router.get("/", async (req, res) => {
   try {
@@ -26,7 +23,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
   try {
     console.log(req.params.id);
     const request = await harvest.getHarvestById(req.params.id);
@@ -102,7 +99,8 @@ router.delete("/:id", auth, async (request, response) => {
       });
   }
 });
-router.post("/:id/upload", async (req, res) => {
+
+router.post("/:id/upload", auth, async (req, res) => {
   singleUpload(req, res, async (err) => {
     if (err) {
       return res.status(400).json({
@@ -110,6 +108,7 @@ router.post("/:id/upload", async (req, res) => {
         message: err.message,
       });
     }
+
     try {
       const id = req.params.id;
       const picture = req.file.location;

@@ -9,6 +9,7 @@ AWS.config.update({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: "us-east-2",
 });
+
 const s3Config = new AWS.S3({
   accessKeyId: process.env.AWS_ACCES_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -27,6 +28,7 @@ const multerS3Config = multerS3({
     cb(null, `${new Date().toISOString()}-${file.originalname}`);
   },
 });
+
 const upload = multer({
   storage: multerS3Config,
   limits: {

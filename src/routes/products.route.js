@@ -21,6 +21,25 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+router.get("/:id", auth, async (request, response) => {
+  try {
+    const id = request.params.id;
+    const productData = await products.getById(id);
+
+    response.json({
+      success: true,
+      data: productData,
+      message: "byid",
+    });
+  } catch (error) {
+    response.status(400);
+    response.json({
+      success: false,
+      error: error.message,
+    });
+  }
+});
+
 router.post("/", auth, async (req, res) => {
   try {
     const newProductsData = req.body;
@@ -79,25 +98,6 @@ router.delete("/:id", auth, async (request, response) => {
         success: false,
         error: error.message,
       });
-  }
-});
-
-router.get("/:id", auth, async (request, response) => {
-  try {
-    const id = request.params.id;
-    const productData = await products.getById(id);
-
-    response.json({
-      success: true,
-      data: productData,
-      message: "byid",
-    });
-  } catch (error) {
-    response.status(400);
-    response.json({
-      success: false,
-      error: error.message,
-    });
   }
 });
 

@@ -1,28 +1,23 @@
 const Products = require("../models/products.model");
 
-function getAll() {
-  return Products.find();
-}
+const getAll = async () => await Products.find();
 
-function create(productsData) {
-  return Products.create(productsData);
-}
+const create = async (productsData) => await Products.create(productsData);
 
-function findByIdAndUpdate(productsId, productsUpdate) {
-  return Products.findByIdAndUpdate(productsId, productsUpdate);
-}
+const findByIdAndUpdate = async (productsId, productsUpdate) =>
+  await Products.findByIdAndUpdate(productsId, productsUpdate, { new: true });
 
-function findByIdAndDelete(productsId) {
-  return Products.findByIdAndDelete(productsId);
-}
+const findByIdAndDelete = async (productsId) =>
+  await Products.findByIdAndDelete(productsId);
 
-async function getById(id) {
+const getById = async (id) => {
   const productById = await Products.findOne({ _id: id });
   if (!productById) {
     throw new Error("Dato incorrecto");
   }
+
   return productById;
-}
+};
 
 module.exports = {
   getAll,
