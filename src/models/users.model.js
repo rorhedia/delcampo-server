@@ -11,7 +11,7 @@ const usersSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxlength: 60,
-    minlength: 10,
+    minlength: 2,
   },
   email: {
     type: String,
@@ -47,12 +47,14 @@ usersSchema.methods.toJSON = function () {
   let user = this;
   let userObject = user.toObject();
   delete userObject.password;
+  delete userObject.created;
+  delete userObject.age;
 
   return userObject;
 };
 
 usersSchema.plugin(uniqueValidator, {
-  message: "Error, expected {PATH} to be unique.",
+  message: "El usuario ya existe",
 });
 
 module.exports = mongoose.model("users", usersSchema);
