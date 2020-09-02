@@ -13,6 +13,14 @@ const findByIdAndUpdate = async (harvestId, harvestUpdate) =>
 const findByIdAndDelete = async (harvestId) =>
   await Harvest.findByIdAndDelete(harvestId);
 
+<<<<<<< HEAD
+function findByIdAndUpdate(harvestId, harvestUpdate) {
+  return Harvest.findByIdAndUpdate(harvestId, harvestUpdate, { new: true });
+}
+function findByIdAndDelete(harvestId) {
+  return Harvest.findByIdAndDelete(harvestId);
+}
+
 module.exports = {
   getAll,
   getHarvestById,
