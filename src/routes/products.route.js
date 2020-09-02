@@ -40,6 +40,7 @@ router.post("/", auth, async (req, res) => {
     });
   }
 });
+
 router.patch("/:id", auth, async (request, response) => {
   try {
     const id = request.params.id;

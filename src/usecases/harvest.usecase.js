@@ -9,7 +9,7 @@ function create(harvestData) {
 }
 
 function findByIdAndUpdate(harvestId, harvestUpdate) {
-  return Harvest.findByIdAndUpdate(harvestId, harvestUpdate);
+  return Harvest.findByIdAndUpdate(harvestId, harvestUpdate, { new: true });
 }
 function findByIdAndDelete(harvestId) {
   return Harvest.findByIdAndDelete(harvestId);

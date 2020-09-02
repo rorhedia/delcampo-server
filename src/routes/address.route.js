@@ -3,7 +3,7 @@ const address = require("../usecases/address.usecase");
 const router = express.Router();
 const auth = require("../middlewares/auth");
 
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const allAddress = await address.getAll();
     res.json({
