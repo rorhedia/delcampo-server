@@ -21,6 +21,24 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const oneAddress = await address.getAddressById(req.params.id);
+    res.json({
+      success: true,
+      data: {
+        address: oneAddress,
+      },
+    });
+  } catch (error) {
+    res.status(400);
+    res.json({
+      success: false,
+      error: error.message,
+    });
+  }
+});
+
 router.post("/", auth, async (req, res) => {
   try {
     const newAddressData = req.body;

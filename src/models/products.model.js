@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
-
 const categories = {
   values: ["Frutas", "Verduras", "Flores", "Raíces", "Vainas"],
   message: "Error, elige una caterogia válida",
