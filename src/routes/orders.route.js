@@ -1,8 +1,9 @@
 const express = require("express");
 const orders = require("../usecases/orders.usecase");
 const router = express.Router();
-const auth = require("../middlewares/auth");
-router.get("/", async (req, res) => {
+const { auth } = require("../middlewares/auth");
+
+router.get("/", auth, async (req, res) => {
   try {
     const allOrders = await orders.getAll();
     res.json({
@@ -19,7 +20,8 @@ router.get("/", async (req, res) => {
     });
   }
 });
-router.post("/", async (req, res) => {
+
+router.post("/", auth, async (req, res) => {
   try {
     const newOrdersData = req.body;
     const newOrders = await orders.create(newOrdersData);
@@ -37,7 +39,8 @@ router.post("/", async (req, res) => {
     });
   }
 });
-router.patch("/:id", async (request, response) => {
+
+router.patch("/:id", auth, async (request, response) => {
   try {
     const id = request.params.id;
     const Update = request.body;
@@ -56,7 +59,8 @@ router.patch("/:id", async (request, response) => {
     });
   }
 });
-router.delete("/:id", async (request, response) => {
+
+router.delete("/:id", auth, async (request, response) => {
   try {
     const ordersIdDelete = request.params.id;
     const deleteOrders = await orders.findByIdAndDelete(ordersIdDelete);
@@ -74,4 +78,5 @@ router.delete("/:id", async (request, response) => {
       });
   }
 });
+
 module.exports = router;

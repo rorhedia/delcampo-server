@@ -7,6 +7,7 @@ const addressRouter = require("./routes/address.route");
 const productsRouter = require("./routes/products.route");
 const harvestRouter = require("./routes/harvest.route");
 const ordersRouter = require("./routes/orders.route");
+const usersRouter = require("./routes/users.route");
 
 app.use(cors());
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use("/address", addressRouter);
 app.use("/products", productsRouter);
 app.use("/harvest", harvestRouter);
 app.use("/orders", ordersRouter);
+app.use("/users", usersRouter);
 
 /** TESTING */
 app.get("/", (request, response) => {

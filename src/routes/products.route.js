@@ -1,7 +1,7 @@
 const express = require("express");
 const products = require("../usecases/products.usecase");
 const router = express.Router();
-const auth = require("../middlewares/auth");
+const { auth } = require("../middlewares/auth");
 
 router.get("/", auth, async (req, res) => {
   try {
@@ -62,6 +62,7 @@ router.patch("/:id", auth, async (request, response) => {
     });
   }
 });
+
 router.delete("/:id", auth, async (request, response) => {
   try {
     const productsIdDelete = request.params.id;

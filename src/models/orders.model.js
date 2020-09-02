@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const ordersSchema = new mongoose.Schema({
   users: {
     type: mongoose.Types.ObjectId,
@@ -20,9 +21,11 @@ const ordersSchema = new mongoose.Schema({
     type: String,
     maxlength: 100,
     minlength: 1,
+    default: "paypal",
   },
   total: {
     type: Number,
   },
 });
+
 module.exports = mongoose.model("orders", ordersSchema);

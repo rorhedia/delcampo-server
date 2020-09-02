@@ -4,7 +4,6 @@ const jwt = require("../lib/jwt");
 
 const signup = async (userData) => {
   const { password } = userData;
-
   const paswdEncripted = await bcrypt.hash(password);
 
   return Users.create({
@@ -15,7 +14,6 @@ const signup = async (userData) => {
 
 const login = async (email, password) => {
   const userByEmail = await Users.findOne({ email });
-
   if (!userByEmail) throw new Error("Usuario o contraseña inválidos");
 
   const passwdIsValid = await bcrypt.compare(password, userByEmail.password);

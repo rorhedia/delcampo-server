@@ -1,7 +1,7 @@
 const express = require("express");
 const address = require("../usecases/address.usecase");
 const router = express.Router();
-const auth = require("../middlewares/auth");
+const { auth } = require("../middlewares/auth");
 
 router.get("/", async (req, res) => {
   try {
@@ -10,6 +10,24 @@ router.get("/", async (req, res) => {
       success: true,
       data: {
         address: allAddress,
+      },
+    });
+  } catch (error) {
+    res.status(400);
+    res.json({
+      success: false,
+      error: error.message,
+    });
+  }
+});
+
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const oneAddress = await address.getAddressById(req.params.id);
+    res.json({
+      success: true,
+      data: {
+        address: oneAddress,
       },
     });
   } catch (error) {
@@ -61,6 +79,7 @@ router.patch("/:id", auth, async (request, response) => {
     });
   }
 });
+
 router.delete("/:id", auth, async (request, response) => {
   try {
     const addressIdDelete = request.params.id;
@@ -79,4 +98,5 @@ router.delete("/:id", auth, async (request, response) => {
       });
   }
 });
+
 module.exports = router;
