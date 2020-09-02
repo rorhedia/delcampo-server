@@ -1,15 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const { signup, login } = require("../usecases/auth.usecase");
+const { session } = require("../middlewares/auth");
 
 router.post("/sign-up", async (request, response) => {
   try {
     const signedUpUser = await signup(request.body);
     response.json({
       success: true,
-      data: {
-        signedUpUser,
-      },
+      data: signedUpUser,
     });
   } catch (error) {
     response.status(400);
@@ -29,6 +28,22 @@ router.post("/sign-in", async (request, response) => {
       data: {
         token,
       },
+    });
+  } catch (error) {
+    response.status(401);
+    response.json({
+      success: false,
+      error: error.message,
+    });
+  }
+});
+
+router.post("/session", session, async (request, response) => {
+  try {
+    let user = request.userModel;
+    response.json({
+      success: true,
+      data: { user },
     });
   } catch (error) {
     response.status(401);

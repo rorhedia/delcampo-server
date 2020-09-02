@@ -1,7 +1,7 @@
 const express = require("express");
 const products = require("../usecases/products.usecase");
 const router = express.Router();
-const auth = require("../middlewares/auth");
+const { auth } = require("../middlewares/auth");
 
 router.get("/", auth, async (req, res) => {
   try {
@@ -15,6 +15,25 @@ router.get("/", auth, async (req, res) => {
   } catch (error) {
     res.status(400);
     res.json({
+      success: false,
+      error: error.message,
+    });
+  }
+});
+
+router.get("/:id", auth, async (request, response) => {
+  try {
+    const id = request.params.id;
+    const productData = await products.getById(id);
+
+    response.json({
+      success: true,
+      data: productData,
+      message: "byid",
+    });
+  } catch (error) {
+    response.status(400);
+    response.json({
       success: false,
       error: error.message,
     });
@@ -79,25 +98,6 @@ router.delete("/:id", auth, async (request, response) => {
         success: false,
         error: error.message,
       });
-  }
-});
-
-router.get("/:id", auth, async (request, response) => {
-  try {
-    const id = request.params.id;
-    const productData = await products.getById(id);
-
-    response.json({
-      success: true,
-      data: productData,
-      message: "byid",
-    });
-  } catch (error) {
-    response.status(400);
-    response.json({
-      success: false,
-      error: error.message,
-    });
   }
 });
 

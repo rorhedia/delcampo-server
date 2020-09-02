@@ -1,7 +1,7 @@
 const express = require("express");
 const orders = require("../usecases/orders.usecase");
 const router = express.Router();
-const auth = require("../middlewares/auth");
+const { auth } = require("../middlewares/auth");
 
 router.get("/", auth, async (req, res) => {
   try {

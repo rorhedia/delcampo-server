@@ -26,6 +26,11 @@ const harvestSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  tag: {
+    type: String,
+    default: "general",
+    enum: ["general", "populares", "temporada", "oferta"],
+  },
   date_start: {
     type: Date,
     default: Date.now,

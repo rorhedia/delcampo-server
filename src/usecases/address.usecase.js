@@ -7,12 +7,16 @@ function getAll() {
   return Address.find().populate("user");
 }
 
+function getAddressById(id) {
+  return Address.findOne({ _id: id }).populate("user");
+}
+
 function create(addressData) {
   return Address.create(addressData);
 }
 
 function findByIdAndUpdate(addressId, addressUpdate) {
-  return Address.findByIdAndUpdate(addressId, addressUpdate);
+  return Address.findByIdAndUpdate(addressId, addressUpdate, { new: true });
 }
 
 function findByIdAndDelete(addressId) {
@@ -24,4 +28,5 @@ module.exports = {
   create,
   findByIdAndUpdate,
   findByIdAndDelete,
+  getAddressById,
 };

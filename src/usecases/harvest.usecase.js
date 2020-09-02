@@ -8,7 +8,7 @@ const getHarvestById = async (id) =>
 const create = async (harvestData) => await Harvest.create(harvestData);
 
 const findByIdAndUpdate = async (harvestId, harvestUpdate) =>
-  await Harvest.findByIdAndUpdate(harvestId, harvestUpdate);
+  await Harvest.findByIdAndUpdate(harvestId, harvestUpdate, { new: true });
 
 const findByIdAndDelete = async (harvestId) =>
   await Harvest.findByIdAndDelete(harvestId);

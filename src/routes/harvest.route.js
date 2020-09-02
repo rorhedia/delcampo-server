@@ -1,7 +1,9 @@
 const express = require("express");
 const harvest = require("../usecases/harvest.usecase");
 const router = express.Router();
-const auth = require("../middlewares/auth");
+const { auth } = require("../middlewares/auth");
+const upload = require("../lib/S3Images");
+const singleUpload = upload.single("images");
 
 router.get("/", async (req, res) => {
   try {
@@ -21,7 +23,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
   try {
     console.log(req.params.id);
     const request = await harvest.getHarvestById(req.params.id);
@@ -96,6 +98,33 @@ router.delete("/:id", auth, async (request, response) => {
         error: error.message,
       });
   }
+});
+
+router.post("/:id/upload", auth, async (req, res) => {
+  singleUpload(req, res, async (err) => {
+    if (err) {
+      return res.status(400).json({
+        success: false,
+        message: err.message,
+      });
+    }
+
+    try {
+      const id = req.params.id;
+      const picture = req.file.location;
+      const UpdatePicture = await harvest.findByIdAndUpdate(id, { picture });
+      res.json({
+        success: true,
+        data: UpdatePicture,
+      });
+    } catch (error) {
+      res.status(400);
+      res.json({
+        success: false,
+        message: error.message,
+      });
+    }
+  });
 });
 
 module.exports = router;
