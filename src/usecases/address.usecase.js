@@ -1,27 +1,16 @@
-const Users = require("../models/users.model");
 const Address = require("../models/address.model");
-const bcrypt = require("../lib/bcrypt");
-const jwt = require("../lib/jwt");
 
-function getAll() {
-  return Address.find().populate("user");
-}
+const getAll = () => Address.find().populate("user").exec();
 
-function getAddressById(id) {
-  return Address.findOne({ _id: id }).populate("user");
-}
+const getAddressById = (id) =>
+  Address.find({ user: id }).populate("user").exec();
 
-function create(addressData) {
-  return Address.create(addressData);
-}
+const create = (addressData) => Address.create(addressData);
 
-function findByIdAndUpdate(addressId, addressUpdate) {
-  return Address.findByIdAndUpdate(addressId, addressUpdate, { new: true });
-}
+const findByIdAndUpdate = (addressId, addressUpdate) =>
+  Address.findByIdAndUpdate(addressId, addressUpdate, { new: true });
 
-function findByIdAndDelete(addressId) {
-  return Address.findByIdAndDelete(addressId);
-}
+const findByIdAndDelete = (addressId) => Address.findByIdAndDelete(addressId);
 
 module.exports = {
   getAll,
